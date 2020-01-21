@@ -1,14 +1,24 @@
 import React, {useState} from 'react';
-import CreateEvent from "./createEvent"
+import CreateEvent from "./createEvent";
 
-function EventList(inVals){
-  //this will print the event list later
-  //console.log(inVals)
+function EventList({inVals, deleteEvent}){
+
+
   return(
-    <div>
-
-    </div>
-
+    <ul className= "list-group">
+      {
+        inVals.map((inVal, idx) =>{
+          return(
+            <li className="list-group-item" key= {idx}>
+              <h2> { inVal.title}</h2>
+              <p>on { inVal.date}</p>
+              <p>{inVal.content}</p>
+              <button onClick= {() => deleteEvent(idx)} > X</button>
+            </li>
+          )
+        })
+      }
+    </ul>
   )
 }
 
@@ -16,13 +26,15 @@ function EventList(inVals){
 function App() {
   const [inVals, setVals] = useState([]);
 
-
-
   function onSave(inVal){
     //inVals.push(inVal)
     setVals([...inVals, inVal])
     console.log(inVals.length, inVals)
 
+  }
+
+  function deleteEvent(idx){
+    delete inVals[idx];
   }
 
   return (
@@ -39,7 +51,7 @@ function App() {
         </div>
         <div className="col border">
           Submited events will appear here:
-          <EventList inVals= { inVals } />
+          <EventList inVals= { inVals } deleteEvent = { deleteEvent} />
         </div>
       </div>
       <div className="row">
