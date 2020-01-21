@@ -34,7 +34,13 @@ function App() {
   }
 
   function deleteEvent(idx){
-    delete inVals[idx];
+    /*//delete inVals[idx];
+    let changed = [...inVals]
+    delete changed[idx]
+    setVals([...changed])*/
+
+    setVals(inVals.filter((inVal, id) => id !== idx))
+
   }
 
   return (
