@@ -1,46 +1,26 @@
 import React, {useState} from 'react';
 import CreateEvent from "./createEvent";
-
-function EventList({inVals, deleteEvent}){
-
-
-  return(
-    <ul className= "list-group">
-      {
-        inVals.map((inVal, idx) =>{
-          return(
-            <li className="list-group-item" key= {idx}>
-              <h2> { inVal.title}</h2>
-              <p>on { inVal.date}</p>
-              <p>{inVal.content}</p>
-              <button onClick= {() => deleteEvent(idx)} > X</button>
-            </li>
-          )
-        })
-      }
-    </ul>
-  )
-}
-
-
+import EventList from "./eventList"
+import moment from 'moment'
 function App() {
   const [inVals, setVals] = useState([]);
 
   function onSave(inVal){
-    //inVals.push(inVal)
-    setVals([...inVals, inVal])
-    console.log(inVals.length, inVals)
 
+    setVals([...inVals, inVal])
+    /*
+    inVals.sort(function( a , b ) {
+      //console.log(`${a.date} - ${b.date} = `, a.date - b.date)
+
+      return({ a.date - b.date } )
+    })
+    console.log(inVals.length, inVals)
+     */
   }
 
   function deleteEvent(idx){
-    /*//delete inVals[idx];
-    let changed = [...inVals]
-    delete changed[idx]
-    setVals([...changed])*/
 
     setVals(inVals.filter((inVal, id) => id !== idx))
-
   }
 
   return (
